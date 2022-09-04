@@ -1,0 +1,10 @@
+__pycache__ 
+.ipynb_checkpoints
+.DS_Store
+data
+raw_data
+_ads
+venv
+demo
+webApp_Heroku
+gensim_topic_modeling_sentences.ipynb
