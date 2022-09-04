@@ -47,22 +47,20 @@ class TextAnalytics:
         -------
         Sentences in each review, and company names
         """
-        sentence_token = [
-            [sentence for sentence in sent_tokenize(data[review].loc[i])]
+        sent_token = [
+            [sent for sent in sent_tokenize(data[review].loc[i])]
             for i in range(len(data))
         ] # this is a list of lists
-        count_sentences = [len(x) for x in sentence_token]
-        sentences = [
-            sentence
-            for sub_sentence in sentence_token
-            for sentence in sub_sentence
-        ] # this is a flattened list
+        sents = [
+            sent for sub_sent in sent_token for sent in sub_sent
+            ] # this is a flattened list
+        count_sent = [len(x) for x in sent_token]
         count_company = [[x] for x in data[company]]
         company_token = []
-        for idx, val in enumerate(count_sentences):
+        for idx, val in enumerate(count_sent):
             company_token.append(count_company[idx] * val)
         company_names = [name for names in company_token for name in names]
-        return sentences, company_names
+        return sents, company_names
 
     def print_review(self, data, index=None):
         """Display index row of the review dataframe.
