@@ -69,7 +69,7 @@ class TextAnalytics:
         """Display index row of the review dataframe.
 
         Parameter
-        --------
+        ---------
         data: pandas dataframe
 
         Returns
@@ -88,7 +88,7 @@ class TextAnalytics:
         """Display index row of the sentence dataframe.
 
         Parameter
-        --------
+        ---------
         data: pandas dataframe
 
         Returns
@@ -145,7 +145,7 @@ class TextAnalytics:
         """Word lemmatization function.
 
         Parameter
-        --------
+        ---------
         text: text
 
         Returns
@@ -160,7 +160,7 @@ class TextAnalytics:
         """Tokenize review text.
 
         Parameter
-        --------
+        ---------
         text: text
 
         Returns
@@ -261,7 +261,7 @@ class TextAnalytics:
         tokenizer = RegexpTokenizer(r'\w+')
         token = [word for word in tokenizer.tokenize(text) if len(word) > 2]
         token = [self.word_lemmatizer(x) for x in token]
-        token = [s for s in token if s not in stop_words]
+        token = [t for t in token if t not in stop_words]
         return token
 
     def detokenizer(self, text):
