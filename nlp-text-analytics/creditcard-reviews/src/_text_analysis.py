@@ -105,7 +105,7 @@ class TextAnalytics:
         print('Sentiment:', sentiment)
         print('Positivity:', positivity)
 
-    def pre_process_text(self, data, text_string):
+    def text_preprocessing(self, data, text_string):
         """Data preprocessing.
 
         Parameters
