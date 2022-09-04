@@ -47,18 +47,17 @@ class TextAnalytics:
         -------
         Sentences in each review, and company names
         """
-        sentence_tokens = [
+        sentence_token = [
             [sentence for sentence in sent_tokenize(data[review].loc[i])]
             for i in range(len(data))
-        ]
-        count_sentences = [len(x) for x in sentence_tokens]
+        ] # this is a list of lists
+        count_sentences = [len(x) for x in sentence_token]
         sentences = [
             sentence
-            for sub_sentence in sentence_tokens
+            for sub_sentence in sentence_token
             for sentence in sub_sentence
-        ]
+        ] # this is a flattened list
         count_company = [[x] for x in data[company]]
-
         company_token = []
         for idx, val in enumerate(count_sentences):
             company_token.append(count_company[idx] * val)
