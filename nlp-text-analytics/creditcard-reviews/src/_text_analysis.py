@@ -54,6 +54,7 @@ class TextAnalytics:
         sents = [
             sent for sub_sent in sent_token for sent in sub_sent
             ] # this is a flattened list
+            
         count_sent = [len(x) for x in sent_token]
         count_company = [[x] for x in data[company]]
         company_token = []
