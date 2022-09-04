@@ -37,8 +37,8 @@ class TextAnalytics:
         """Converts reviews to sentences and keeps track
         of company name for each sentence
 
-        Parameter
-        --------
+        Parameters
+        ----------
         data: pandas dataframe
         reviews: text column for reviews
         company: name of credit card compnay
@@ -108,8 +108,8 @@ class TextAnalytics:
     def pre_process_text(self, data, text_string):
         """Data preprocessing.
 
-        Parameter
-        --------
+        Parameters
+        ----------
         data: pandas dataframe
         text_string: text column
 
@@ -268,7 +268,7 @@ class TextAnalytics:
         """Remove wide space in review texts.
 
         Parameter
-        --------
+        ---------
         text: sentence
 
         Returns
@@ -283,7 +283,7 @@ class TextAnalytics:
         """Compound polarity score of each senetence in vader sentiment analysis.
 
         Parameter
-        --------
+        ---------
         sentence: sentence
 
         Returns
@@ -298,7 +298,7 @@ class TextAnalytics:
         """Polarity score of each senetence in textblob sentiment analysis.
 
         Parameter
-        --------
+        ---------
         sentence: sentence
 
         Returns
@@ -311,8 +311,8 @@ class TextAnalytics:
     def topic_threshold(self, doc_topic, topic_vector, threshold=None):
         """Return the topic number if the topic is more than threshold.
 
-        Parameter
-        ---------
+        Parameters
+        ----------
         doc_topic: document-topic matrix (pandas dataFrame)
         topic_vector: topic vector (pandas dataFrame)
         threshold: threshold
@@ -339,7 +339,7 @@ class TextAnalytics:
         """Add bigrams in the data.
 
         Parameter
-        --------
+        ---------
         token_list: list of tokens
 
         Returns
@@ -354,7 +354,7 @@ class TextAnalytics:
         """Add trigrams in the data.
 
         Parameter
-        --------
+        ---------
         token_list: list of tokens
 
         Returns
@@ -369,8 +369,8 @@ class TextAnalytics:
     def doc_term_matrix(self, data, text):
         """Returns document-term matrix.
 
-        Parameter
-        --------
+        Parameters
+        ----------
         data: pandas dataframe
         text: text column
 
@@ -392,7 +392,7 @@ class TextAnalytics:
         """Train word2vec on the corpus.
 
         Parameter
-        --------
+        ---------
         token_list: list of tokens
 
         Returns
@@ -418,7 +418,7 @@ class TextAnalytics:
         """Returns topics, topic_sentiments, and credit cards.
 
         Parameter
-        --------
+        ---------
         data: Pandas DataFrame
 
         Returns
@@ -440,10 +440,10 @@ class TextAnalytics:
             )
             card_lists.append(list(group_table.index))
             topic_sentiment.append(group_table.values.round(2))
-            for j in range(len(group_table)):
+            for _ in range(len(group_table)):
                 topics.append(topic_list[i])
 
-        # Convert the list of lists to list
+        # convert the list of lists to list
         card_list = [card for sub_card in card_lists for card in sub_card]
         topic_sen = [sen for sub_sen in topic_sentiment for sen in sub_sen]
         return topics, card_list, topic_sen
