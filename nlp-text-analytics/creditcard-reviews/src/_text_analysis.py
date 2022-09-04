@@ -34,7 +34,7 @@ class TextAnalytics:
         """Parameter initialization."""
 
     def review_to_sent(self, data, review, company):
-        """Converts reviews to sentences and keeps track
+        """Convert reviews to sentences and keep track
         of company name for each sentence
 
         Parameters
