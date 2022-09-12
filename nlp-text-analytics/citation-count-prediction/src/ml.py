@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import cross_val_predict
 
 class RegressionModels:
-    """This class is used for training supervised regression models."""
+    """A class for training supervised regression models."""
 
     def __init__(self):
         """Parameter initialization."""
@@ -47,10 +47,8 @@ class RegressionModels:
         y_pred_cv = cross_val_predict(model, X_train, y_train, cv=cv_fold)
 
         # print results
-        print('{}-Fold cross-validation results for {}'.format(
-            str(cv_fold), 
-            str(model_nm)
-            )
+        print(
+            f'{str(cv_fold)}-Fold cross-validation results for {str(model_nm)}',
         )
         print('-' * 45)
         print(self.error_metrics(y_train, y_pred_cv))
@@ -109,9 +107,7 @@ class RegressionModels:
 
         ax1.set_xlabel("C", fontsize = 15)
         ax1.set_ylabel("MAE", fontsize = 15)
-        ax1.set_title("{}-Fold Cross-Validation with RBF kernel SVR".format(
-            cv_fold
-            ), 
+        ax1.set_title(f"{cv_fold}-Fold Cross-Validation with RBF kernel SVR", 
             fontsize=15
         )
         ax1.set_xticklabels(axes_labels)
@@ -119,9 +115,7 @@ class RegressionModels:
         ax1.legend(loc = 'best')
         ax2.set_xlabel("C", fontsize = 15)
         ax2.set_ylabel("RSME", fontsize = 15)
-        ax2.set_title("{}-Fold Cross-Validation with RBF kernel SVR".format(
-            cv_fold
-            ), 
+        ax2.set_title(f"{cv_fold}-Fold Cross-Validation with RBF kernel SVR", 
             fontsize=15
         )
         ax2.set_xticks(range(len(C_list)))
@@ -129,7 +123,7 @@ class RegressionModels:
         ax2.legend(loc = 'best')
         plt.show()
         
-    def eval_metric_test(self, y_pred, y_true, model_nm = None):
+    def eval_metric_test(self, y_pred, y_true, model_nm=None):
         """Predictions on the test set.
 
         Parameters
@@ -142,7 +136,7 @@ class RegressionModels:
         Performance metrics on the test set
         """
         # Print results
-        print('Test prediction results for {}'.format(model_nm))
+        print(f'Test prediction results for {model_nm}')
         print('-' * 45)
         print(self.error_metrics(y_true, y_pred))
         print('-' * 45)
@@ -193,12 +187,12 @@ class RegressionModels:
         r2 = self.r_squared(y_true, y_pred)
         mae = self.mae(y_true, y_pred)
         rmse = self.rmse(y_true, y_pred)
-        result = {
-            'MAE = {}'.format(np.round(mae,3)),
-            'RMSE = {}'.format(np.round(rmse,3)),
-            'R^2 = {}'.format(np.round(r2,3)),
+        errors = {
+            f'MAE = {np.round(mae,3)}',
+            f'RMSE = {np.round(rmse,3)}',
+            f'R^2 = {np.round(r2,3)}',
         }
-        return result
+        return errors
 
     def mae(self, y_test, y_pred):
         """Mean absolute error.
