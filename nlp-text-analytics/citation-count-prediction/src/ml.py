@@ -54,6 +54,83 @@ class RegressionModels:
         print(self.error_metrics(y_train, y_pred_cv))
         print('-' * 45)
     
+    def eval_metric_test(self, y_pred, y_true, model_nm=None):
+        """Predictions on the test set.
+
+        Parameters
+        ----------
+        y_pred: training set class labels
+        y_true: test set class labels
+
+        Returns
+        -------
+        Performance metrics on the test set
+        """
+        # Print results
+        print(f'Test prediction results for {model_nm}')
+        print('-' * 45)
+        print(self.error_metrics(y_true, y_pred))
+        print('-' * 45)
+    
+    def error_metrics(self, y_true, y_pred):
+        """Print out error metrics."""
+        r2 = self.r_squared(y_true, y_pred)
+        mae = self.mae(y_true, y_pred)
+        rmse = self.rmse(y_true, y_pred)
+        errors = {
+            f'MAE = {np.round(mae,3)}',
+            f'RMSE = {np.round(rmse,3)}',
+            f'R^2 = {np.round(r2,3)}',
+        }
+        return errors
+
+    def mae(self, y_test, y_pred):
+        """Mean absolute error.
+        
+        Parameters
+        ----------
+        y_test: test set label
+        y_pred: prediction label
+
+        Returns
+        -------
+        Mean absolute error
+        """
+        mae = np.mean(np.abs((y_test - y_pred)))
+        return mae
+
+    def rmse(self, y_test, y_pred):
+        """Root mean squared error.
+        
+        Parameters
+        ----------
+        y_test: test set label
+        y_pred: prediction label
+
+        Returns
+        -------
+        Root mean squared error
+        """
+        rmse = np.sqrt(np.mean((y_test - y_pred)**2))
+        return rmse
+
+    def r_squared(self, y_test, y_pred):
+        """r-squared (coefficient of determination).
+        
+        Parameters
+        ----------
+        y_test: test set label
+        y_pred: prediction label
+
+        Returns
+        -------
+        r-squared
+        """
+        mse = np.mean((y_test - y_pred)**2)  # mean squared error
+        var = np.mean((y_test - np.mean(y_test))**2)  # sample variance
+        r_squared = 1 - mse / var
+        return r_squared
+    
     def plot_mae_rsme_svr(self, X_train, y_train, cv_fold):
         """Plot of cross-validation MAE and RMSE for SVR.
 
@@ -122,25 +199,7 @@ class RegressionModels:
         ax2.set_xticklabels(axes_labels)
         ax2.legend(loc = 'best')
         plt.show()
-        
-    def eval_metric_test(self, y_pred, y_true, model_nm=None):
-        """Predictions on the test set.
-
-        Parameters
-        ----------
-        y_pred: training set class labels
-        y_true: test set class labels
-
-        Returns
-        -------
-        Performance metrics on the test set
-        """
-        # Print results
-        print(f'Test prediction results for {model_nm}')
-        print('-' * 45)
-        print(self.error_metrics(y_true, y_pred))
-        print('-' * 45)
-        
+            
     def diagnostic_plot(self, y_pred, y_true, ylim = None):
         """Diagnostic plot
         
@@ -181,62 +240,3 @@ class RegressionModels:
         ax2.set_xlabel('Predicted values')
         ax2.set_ylabel('True values')
         ax2.set_title('True values vs. Predicted values')
-    
-    def error_metrics(self, y_true, y_pred):
-        """Print out error metrics."""
-        r2 = self.r_squared(y_true, y_pred)
-        mae = self.mae(y_true, y_pred)
-        rmse = self.rmse(y_true, y_pred)
-        errors = {
-            f'MAE = {np.round(mae,3)}',
-            f'RMSE = {np.round(rmse,3)}',
-            f'R^2 = {np.round(r2,3)}',
-        }
-        return errors
-
-    def mae(self, y_test, y_pred):
-        """Mean absolute error.
-        
-        Parameters
-        ----------
-        y_test: test set label
-        y_pred: prediction label
-
-        Returns
-        -------
-        Mean absolute error
-        """
-        mae = np.mean(np.abs((y_test - y_pred)))
-        return mae
-
-    def rmse(self, y_test, y_pred):
-        """Root mean squared error.
-        
-        Parameters
-        ----------
-        y_test: test set label
-        y_pred: prediction label
-
-        Returns
-        -------
-        Root mean squared error
-        """
-        rmse = np.sqrt(np.mean((y_test - y_pred)**2))
-        return rmse
-
-    def r_squared(self, y_test, y_pred):
-        """r-squared (coefficient of determination).
-        
-        Parameters
-        ----------
-        y_test: test set label
-        y_pred: prediction label
-
-        Returns
-        -------
-        r-squared
-        """
-        mse = np.mean((y_test - y_pred)**2)  # mean squared error
-        var = np.mean((y_test - np.mean(y_test))**2)  # sample variance
-        r_squared = 1 - mse / var
-        return r_squared
